@@ -1,0 +1,16 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Model artifacts and local data exports
+backend/artifacts/
+backend/data/*.csv
+
+# OS files
+.DS_Store
+Thumbs.db
