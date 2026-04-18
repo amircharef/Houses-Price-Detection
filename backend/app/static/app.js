@@ -1,5 +1,6 @@
 const form = document.getElementById("predictForm");
 const resultEl = document.getElementById("result");
+const USD_TO_DZA = 133; // Approximate exchange rate: 1 USD = 133 DZA
 
 function parseForm(formData) {
   return {
@@ -16,11 +17,11 @@ function parseForm(formData) {
 }
 
 function asCurrency(value) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
+  const formatted = new Intl.NumberFormat("fr-DZ", {
+    minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(value);
+  return `${formatted} دج`;
 }
 
 form.addEventListener("submit", async (event) => {
@@ -42,7 +43,8 @@ form.addEventListener("submit", async (event) => {
     }
 
     const data = await response.json();
-    resultEl.textContent = `Estimated house price: ${asCurrency(data.predicted_price)}`;
+    const priceInDZA = data.predicted_price * USD_TO_DZA;
+    resultEl.textContent = `Estimated house price: ${asCurrency(priceInDZA)}`;
   } catch (error) {
     resultEl.textContent = `Error: ${error.message}`;
   }

@@ -15,4 +15,4 @@ class HouseFeatures(BaseModel):
 
 class PredictionResponse(BaseModel):
     predicted_price: float
-    currency: str = "USD"
+    currency: str = "DZA"
